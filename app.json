@@ -1,14 +1,14 @@
 {
   "expo": {
     "name": "ecommerce",
-    "description": "An empty new project",
+    "description": "Simple E-Commerce App Powered By React Native and Marketcloud",
     "slug": "ecommerce",
     "privacy": "public",
     "sdkVersion": "20.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
-    "primaryColor": "#cccccc",
-    "icon": "./assets/icons/app-icon.png",
+    "primaryColor": "#00897B",
+    "icon": "./assets/images/app-icon.png",
     "loading": {
       "icon": "./assets/icons/loading-icon.png",
       "hideExponentText": false
@@ -17,7 +17,11 @@
       "assetExts": ["ttf", "mp4"]
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rizkiandrianto.ecommerce"
+    },
+    "android": {
+      "package": "com.rizkiandrianto.ecommerce"
     }
   }
 }
