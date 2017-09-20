@@ -12,8 +12,8 @@ export default {
   platformStyle,
   platform,
   // AndroidRipple
-  androidRipple: true,
-  androidRippleColor: "rgba(256, 256, 256, 0.3)",
+  androidRipple: false,
+  androidRippleColor: "rgba(256, 256, 256, 0)",
   androidRippleColorDark: "rgba(0, 0, 0, 0.15)",
 
   // Badge

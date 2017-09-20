@@ -17,11 +17,11 @@ class InputForm extends Component {
         };
         this.changeHandler = this.changeHandler.bind(this);
     }
-    changeHandler(e) {
+    changeHandler(value) {
         this.setState({
-            value: e.target.value
+            value: value
         });
-        this.props.onChange && this.props.onChange(e, e.target.value);
+        this.props.onChangeText && this.props.onChangeText(value);
     }
     render() {
         const { color } = this.state;
@@ -38,7 +38,7 @@ class InputForm extends Component {
             <Col>
                 <Item stackedLabel style={{marginLeft: 0}} {...root_props}>
                     <Label style={{color: color}}>{props.all.label || ''}</Label>
-                    <Input {...props.filtered} style={{color: color, ...props.filtered.style}} onChange={this.changeHandler} value={this.state.value} />
+                    <Input {...props.filtered} style={{color: color, ...props.filtered.style}} onChangeText={this.changeHandler} value={this.state.value} />
                 </Item>
                 <Text style={styles.message}>{props.all.error || props.all.success || props.all.message}</Text>
             </Col>

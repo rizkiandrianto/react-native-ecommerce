@@ -39,7 +39,7 @@ class ButtonWithBackground extends Component {
             }
         });
         return (
-            <Button rounded {...props.filtered} style={styles.all}>
+            <Button androidRippleColor="transparent" rounded {...props.filtered} style={styles.all}>
                 {props.all.loading ? <Spinner style={{marginRight: 'auto', marginLeft: 'auto'}} color="white"/> : <Text style={styles.text}>{props.all.text || ''}</Text>}
             </Button>
         );
