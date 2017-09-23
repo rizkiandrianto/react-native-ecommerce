@@ -8,6 +8,17 @@ import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
 import { Alert, AsyncStorage } from 'react-native';
 
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import reducer from 'redux/reducers';
+
+const middlewares = [thunk];
+
+if (process.env.NODE_ENV == "development") middlewares.push(createLogger());
+let store = createStore(reducer, {}, applyMiddleware(...middlewares));
+
 KeepAwake.activate();
 
 class ExportApp extends Component {
@@ -53,9 +64,11 @@ class ExportApp extends Component {
     if (this.state.fontLoaded) {
       return (
         <Root>
-          <StyleProvider style={getTheme(material)}>
-            <App />
-          </StyleProvider>
+          <Provider store={store}>
+            <StyleProvider style={getTheme(material)}>
+              <App />
+            </StyleProvider>
+          </Provider>
         </Root>
       );
     }
