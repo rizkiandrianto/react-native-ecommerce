@@ -16,6 +16,14 @@ class Main extends Component {
         this.getItem = this.getItem.bind(this);
         this.setItem = this.setItem.bind(this);
         this.setCounter = this.setCounter.bind(this);
+        this.logout = this.logout.bind(this);
+    }
+    logout() {
+        AsyncStorage.clear(()=>{
+            this.props.navigation.navigate('Main');
+            AsyncStorage.getItem("login").then((value) => {
+            }).done();
+        })
     }
     setCounter() {
         this.props.setIncreaseCounter();
@@ -32,9 +40,7 @@ class Main extends Component {
         return (
             <View>
                 <Button onPress={()=>{Expo.Util.reload()}}><Text>Reload</Text></Button>
-                <Button onPress={()=>{AsyncStorage.clear(()=>{
-                    console.log('TEST');
-                    })}}><Text>Clear Async Storage</Text></Button>
+                <Button onPress={this.logout}><Text>Clear Async Storage and Logout</Text></Button>
 
                 <ButtonWB light center full text="Get Login" onPress={this.getItem}/>
                 <ButtonWB light center full text="Set Login" onPress={this.setItem}/>

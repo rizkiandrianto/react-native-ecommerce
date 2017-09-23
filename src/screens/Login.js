@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import { LinearGradient } from 'expo';
 import { Container, Header, Content, Form, Text, View, Toast } from 'native-base';
-import { Image, AsyncStorage } from 'react-native';
+import { Image, AsyncStorage, Keyboard } from 'react-native';
 import ButtonWB from 'components/button/ButtonWithBackground';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import Input from 'components/form/Input';
@@ -39,6 +39,7 @@ export class Main extends React.Component {
     }
     onSubmit() {
       const { email, password } = this.state.form;
+      Keyboard.dismiss();
       this.setState({
         loadingButton: true
       });
@@ -96,7 +97,7 @@ export class Main extends React.Component {
         <Container>
           <Image source={require('../../assets/images/building.png')} style={{opacity: 0.7, width: '100%', height: '100%'}}>
             <LinearGradient colors={['#26A69A', '#009688', '#00897B']} style={{height: '100%'}}>
-              <Content>
+              <Content keyboardShouldPersistTaps={'handled'}>
                 <Form>
                   <Grid style={{width: '80%', marginLeft: 'auto', marginRight: 'auto'}}>
                     <Row>
