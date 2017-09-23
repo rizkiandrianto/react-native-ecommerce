@@ -10,7 +10,6 @@ import ButtonWB from 'components/button/ButtonWithBackground';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import Input from 'components/form/Input';
 import { POST } from 'helpers/Fetch';
-import AsyncReader from 'helpers/AsyncReader';
 
 export class Main extends React.Component {
     // static navigationOptions = { title: 'Welcome', header: <Header backgroundColor="#4DB6AC"/> };
