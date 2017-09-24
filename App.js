@@ -6,7 +6,8 @@ import { KeepAwake, Font } from 'expo';
 import { Root, StyleProvider, Toast } from 'native-base';
 import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
-import { Alert, AsyncStorage } from 'react-native';
+import { Alert } from 'react-native';
+import GetUserDetail from 'helpers/GetUserDetail';
 
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
@@ -30,19 +31,15 @@ class ExportApp extends Component {
     };
   }
   componentWillMount() {
-    AsyncStorage.getItem("login").then((value) => {
-      if (value) {
+    GetUserDetail((err, res)=>{
+      if (!err) {
         this.setState({
           mainScreen: Main
         });
       }
-    }).done();
+    });
   }
   async componentDidMount() {
-    /* Alert.alert(
-      'Alert Title',
-      'My Alert Msg'
-    ); */
     await Font.loadAsync({
       'Roboto': require('native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf')
@@ -57,6 +54,9 @@ class ExportApp extends Component {
       },
       MainScreen: {
         screen: Main
+      },
+      Login: {
+        screen: Login
       }
     }, {
       initialRouteName: 'Main'

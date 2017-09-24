@@ -100,13 +100,14 @@ export default (variables = variable) => {
 					lineHeight: 24,
 					height: variables.searchBarHeight,
 				},
-				alignSelf: "center",
+				alignSelf: "flex-end",
 				alignItems: "center",
 				justifyContent: "flex-start",
 				flex: 1,
 				height: variables.searchBarHeight,
 				borderColor: "transparent",
 				backgroundColor: variables.toolbarInputColor,
+				marginBottom: 20
 			},
 			"NativeBase.Button": {
 				".transparent": {

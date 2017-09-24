@@ -1,62 +1,65 @@
 /**
- * @providesModule screens/Main
- */
+* @providesModule screens/Main
+*/
 
 import React, { Component } from 'react';
-import { Text, Button } from 'native-base';
-import { View, AsyncStorage } from 'react-native';
-import ButtonWB from 'components/button/ButtonWithBackground';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { setIncreaseCounter } from 'redux/actions/MainAction';
+import { Container, Content, Text } from 'native-base';
+import Header from 'components/header/HeaderWithSearch';
+import { GET } from 'helpers/Fetch';
+import ProductList from 'components/list/product/ProductList';
 
 class Main extends Component {
+    static navigationOptions = { header: null };
     constructor() {
         super();
-        this.getItem = this.getItem.bind(this);
-        this.setItem = this.setItem.bind(this);
-        this.setCounter = this.setCounter.bind(this);
-        this.logout = this.logout.bind(this);
+        this.state = {
+            data: [],
+            loading: true
+        };
+        this.submitSearch = this.submitSearch.bind(this);
     }
-    logout() {
-        AsyncStorage.clear(()=>{
-            this.props.navigation.navigate('Main');
-            AsyncStorage.getItem("login").then((value) => {
-            }).done();
-        })
+    componentDidMount() {
+        this.call_data();
     }
-    setCounter() {
-        this.props.setIncreaseCounter();
+    submitSearch(value) {
+        this.call_data(value);
     }
-    getItem() {
-        AsyncStorage.getItem("login").then((value) => {
-            console.log(value);
-        }).done();
+    renderItem() {
+        return this.state.data.map((key, index)=>{
+            return <Text key={index}>{key.name}</Text>
+        });
     }
-    setItem() {
-        AsyncStorage.setItem("login", "=== TOKEN ===");
+    call_data(param) {
+        this.setState({
+            loading: true
+        });
+        let config = {
+            url: 'products'
+        };
+        if (param) config.query = {q: param};
+        console.log(config);
+        GET({
+            ...config
+        }, (err, res) => {
+            if (!err) {
+                this.setState({
+                    ...this.state,
+                    ...res,
+                    loading: false
+                });
+            }
+        });
     }
     render() {
         return (
-            <View>
-                <Button onPress={()=>{Expo.Util.reload()}}><Text>Reload</Text></Button>
-                <Button onPress={this.logout}><Text>Clear Async Storage and Logout</Text></Button>
-
-                <ButtonWB light center full text="Get Login" onPress={this.getItem}/>
-                <ButtonWB light center full text="Set Login" onPress={this.setItem}/>
-                <ButtonWB light center full text="Reload App" onPress={()=>{Expo.Util.reload()}}/>
-
-                <ButtonWB light center full text={"Counter : " + this.props.counter} onPress={this.setCounter}/>
-            </View>
+            <Container>
+                <Header onSubmitEditing={this.submitSearch}/>
+                <Content>
+                    <ProductList loading={this.state.loading} data={this.state.data}/>
+                </Content>
+            </Container>
         );
     }
 }
 
-export default connect(
-    state => ({
-        counter: state.Main.counter
-    }),
-    dispatch => bindActionCreators({
-       setIncreaseCounter 
-    }, dispatch)
-)(Main);
+export default Main;
