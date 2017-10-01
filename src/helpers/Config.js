@@ -15,5 +15,6 @@ export default {
         'accept': "application/json",
         'content-type': "application/json"
     },
-    screenHeight: Dimensions.get('window')
+    screenHeight: Dimensions.get('window').height,
+    screenWidth: Dimensions.get('window').width
 };

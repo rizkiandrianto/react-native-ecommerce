@@ -54,7 +54,7 @@ class Main extends Component {
             <Container>
                 <Header onSubmitEditing={this.submitSearch}/>
                 <Content>
-                    <ProductList loading={this.state.loading} data={this.state.data}/>
+                    <ProductList navigation={this.props.navigation} loading={this.state.loading} data={this.state.data}/>
                 </Content>
             </Container>
         );

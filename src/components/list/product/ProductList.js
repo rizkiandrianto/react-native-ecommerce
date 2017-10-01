@@ -69,16 +69,24 @@ class ProductList extends Component {
     renderProduct() {
         const PRODUCT_PER_PAGE = 2;
         const separator = Array.range(this.props.data.length).chunk(PRODUCT_PER_PAGE);
+        const { navigate } = this.props.navigation;
         renderColumn = (key) => {
             return key.map((x, y)=>{
+                const data = this.props.data[x];
                 const props = {
-                    title: this.props.data[x].name,
-                    image: this.props.data[x].images[0],
-                    price: this.props.data[x].display_price,
-                    stock: this.props.data[x].stock_status,
-                    key: this.props.data[x].id
+                    title: data.name,
+                    image: data.images[0],
+                    price: data.display_price,
+                    stock: data.stock_status,
+                    key: data.id,
+                    navigate,
+                    data 
                 };
-                return <Col key={props.key}><ProductItem {...props}/></Col>;
+                return (
+                    <Col key={props.key}>
+                        <ProductItem {...props}/>
+                    </Col>
+                );
             });
         };
         return separator.map((key, index)=>{

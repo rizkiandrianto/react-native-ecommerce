@@ -2,8 +2,8 @@
 * @providesModule components/list/product/ProductItem
 */
 import React from 'react';
-import { Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
-import { Image, StyleSheet } from 'react-native';
+import { Card, CardItem, Text, Body } from 'native-base';
+import { Image, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 
 const style = StyleSheet.create({
     thumbnail: {
@@ -19,19 +19,27 @@ const style = StyleSheet.create({
     }
 });
 
-function ProductItem({image, title, price, stock}) {
+function ProductItem({image, title, price, stock, navigate, data}) {
+    const onClick = () => {
+        navigate('ProductDetail', {
+            ...data
+        });
+    };
+
     return (
-        <Card>
-            <CardItem cardBody style={style.thumbnailWrapper}>
-                <Image source={{uri: image}} style={style.thumbnail}/>
-            </CardItem>
-            <CardItem>
-                <Body>
-                    <Text ellipsizeMode="tail">{title}</Text>
-                    <Text ellipsizeMode="tail">{price}</Text>
-                </Body>
-            </CardItem>
-        </Card>
+        <TouchableOpacity onPress={()=>{onClick()}}>
+            <Card button onPress={()=>{console.log('Sempak')}}>
+                <CardItem cardBody style={style.thumbnailWrapper}>
+                    <Image source={{uri: image}} style={style.thumbnail}/>
+                </CardItem>
+                <CardItem>
+                    <Body>
+                        <Text ellipsizeMode="tail">{title}</Text>
+                        <Text ellipsizeMode="tail">{price}</Text>
+                    </Body>
+                </CardItem>
+            </Card>
+        </TouchableOpacity>
     );
 }
 

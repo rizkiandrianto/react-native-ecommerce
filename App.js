@@ -15,6 +15,8 @@ import reducer from 'redux/reducers';
 
 import Login from 'screens/Login';
 import Main from 'screens/Main';
+import ProductDetail from 'screens/ProductDetail';
+import ScrollSwaggerTest from 'screens/ScrollSwaggerTest';
 import Test from 'screens/Test';
 import Loading from 'screens/Loading';
 
@@ -37,7 +39,7 @@ class ExportApp extends Component {
     GetUserDetail((err, res)=>{
       if (!err && res != null) {
         this.setState({
-          mainScreen: Main
+          mainScreen: ProductDetail
         });
       }
     });
@@ -45,7 +47,8 @@ class ExportApp extends Component {
   async componentDidMount() {
     await Font.loadAsync({
       'Roboto': require('native-base/Fonts/Roboto.ttf'),
-      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf')
+      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+      'Arial': require('./assets/fonts/arial.ttf')
     });
 
     this.setState({ fontLoaded: true });
@@ -55,11 +58,17 @@ class ExportApp extends Component {
       Main: {
         screen: this.state.mainScreen
       },
+      Login: {
+        screen: Login
+      },
       MainScreen: {
         screen: Main
       },
-      Login: {
-        screen: Login
+      ProductDetail: {
+        screen: ProductDetail
+      },
+      Test: {
+        screen: Test
       }
     }, {
       initialRouteName: 'Main'
