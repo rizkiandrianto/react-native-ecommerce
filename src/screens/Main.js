@@ -37,7 +37,6 @@ class Main extends Component {
             url: 'products'
         };
         if (param) config.query = {q: param};
-        console.log(config);
         GET({
             ...config
         }, (err, res) => {

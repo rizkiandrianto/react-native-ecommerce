@@ -11,7 +11,7 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import Input from 'components/form/Input';
 import { POST } from 'helpers/Fetch';
 
-export class Main extends React.Component {
+export class Login extends React.Component {
     // static navigationOptions = { title: 'Welcome', header: <Header backgroundColor="#4DB6AC"/> };
     static navigationOptions = { title: 'Welcome', header: null };
     constructor(props) {
@@ -130,4 +130,4 @@ export class Main extends React.Component {
     }
 }
 
-export default Main;
+export default Login;

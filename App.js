@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
-import Login from 'screens/Login';
-import Main from 'screens/Main';
 import { KeepAwake, Font } from 'expo';
 import { Root, StyleProvider, Toast } from 'native-base';
 import getTheme from './native-base-theme/components';
@@ -14,6 +12,11 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import reducer from 'redux/reducers';
+
+import Login from 'screens/Login';
+import Main from 'screens/Main';
+import Test from 'screens/Test';
+import Loading from 'screens/Loading';
 
 const middlewares = [thunk];
 
@@ -32,7 +35,7 @@ class ExportApp extends Component {
   }
   componentWillMount() {
     GetUserDetail((err, res)=>{
-      if (!err) {
+      if (!err && res != null) {
         this.setState({
           mainScreen: Main
         });
@@ -72,7 +75,7 @@ class ExportApp extends Component {
         </Root>
       );
     }
-    return null;
+    return <Loading />;
   }
 }
 
